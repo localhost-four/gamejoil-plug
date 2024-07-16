@@ -32,147 +32,68 @@ document.addEventListener("DOMContentLoaded", function(event) {
             null;
         }
 
-        // Создаем элемент div для экран-заставки
-        var overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.top = "0";
-        overlay.style.left = "0";
-        overlay.style.width = "80%";
-        overlay.style.height = "80%";
-
-
-
-        // взять текст со страницы 
-        var content = mess;
-
-        var captionElements = document.querySelectorAll('div');
-        captionElements.forEach(function(element) {
-        content += element.textContent + '<br>';
-        });
-
-        var blob = new Blob([content], { type: 'text/plain' });
-        var url = URL.createObjectURL(blob);
-
-
-
-        // Добавляем текст на экран-заставку
-        var text = document.createElement("p");
-        text.innerHTML = `
-        <div id="game-menu">
+        var message = document.createElement('div');
+        message.innerText = mess;
+        message.style.position = 'fixed';
+        message.style.top = '0';
+        message.style.left = '15%';
+        message.style.transform = 'translateX(-100%)';
+        message.style.background = 'lightblue';
+        message.style.color = 'white';
+        message.style.padding = '10px';
+        message.style.borderRadius = '5px';
+        message.style.zIndex = '9998';
+        message.style.transition = 'all 0.5s ease';
         
-            <nav><h1>`+mess+`</h1>
-            <a>`+url+`</a></nav>
-        </div>`;
-
-        text.style.color = "white";
-        text.style.fontSize = "24px";
-
-
-        overlay.appendChild(text);
-
-        document.body.appendChild(overlay);
-
-        var messages = document.querySelectorAll("div#game-menu");
-        var current = messages.length - 1;
-        for (var i = current; i >= 0; i--) {
-            var topPos = i * 280;
-            messages[i].style.top = topPos + "px";
-        }
-
+        document.body.appendChild(message);
+        
         setTimeout(function() {
+            message.style.top = '-100px';
+            setTimeout(function() {
+                message.remove();
+            }, 500);
+        }, 2600);
         
-            document.body.removeChild(overlay);
-    
-        }, 1800);
+        var messages = document.querySelectorAll('div');
+        messages.forEach(function(msg, index) {
+            msg.style.transform = 'translateX(' + (messages.length - index) * 300 + 'px)';
+        });
     }
+        
+    displayMessage('Created by: staffuser');
 
+    try {
+        var iframe = document.getElementById('myFrame');
+        
+        iframe.onload = function() {
+            setTimeout(function() { 
+                displayMessage('Managed to connect!');
+            }, 500);
+        };
+
+        iframe.onerror = function() {
+            setTimeout(function() { 
+                displayMessage('failed to load page!');
+            }, 500);
+            iframe.src = "https://gamejolt.com/";
+        };
+    } catch(n) { 
+        setTimeout(function() {  
+            displayMessage('loading');
+        }, 500);
+    }
 
     addEventListener("message", (event) => {
-        displayMessage(event);
+        setTimeout(function() {  
+            displayMessage(event.data);
+        }, 500);
     });
-
-    frameset.onload = function() {
-
-        // we can get the reference to the inner window
-        let iframeWindow = frameset.contentWindow; // OK
-        try {
-            // ...but not to the document inside it
-            let doc = frameset.contentDocument; // ERROR
-        } catch(e) {
-            displayMessage(e); // Security Error (another origin)
-        }
-
-        frameset.onload = null; // clear the handler, not to run it after the location change
-    };
-
-    let consoleLog = console.log;
-    console.logHistory = [];
-
-    console.log = function(message) {
-        //consoleLog.apply(console, arguments); // сохраняем сообщение в консоли
-        console.logHistory.push(message); // сохраняем сообщение в истории
-        displayMessage(message);
-    }
-
-
-
-    function checkConsole() {
-    
-    let newMessages = console.logHistory.slice(-5); // проверяем последние 5 сообщений
-    console.logHistory = []; // очищаем историю сообщений
-
-    if (newMessages.length > 0) {
-        newMessages.forEach((message, index) => {
-            displayMessage(`Page: ` + index + ` mess: ` + message);
-        });
-    } else {
-        if (console.logHistory.length > 0) {
-            if (console.logHistory[console.logHistory.length - 1].length > console.logHistory.join('').length) {
-                displayMessage(console.logHistory[console.logHistory.length - 1]);
-            } else {
-                displayMessage(console.logHistory.join('n'));
-            }
-        } //else {
-            //displayMessage('Notifications');
-        //}
-
-        setTimeout(function() {checkConsole()}, 1500);
-    }
-    }
-
-    setInterval( checkConsole() , 250); // Выводит новые сообщения 
-    
-
-    // Слушаем событие message консоли и вызываем функцию displayMessage()
-    window.addEventListener('message', function(event) {
-        displayMessage(event.data);
-
-        setTimeout(function() {checkConsole()}, 250);
-    });
-
-    (function() {
-        var oldLog = console.log;
-        
-        console.log = function(message) {
-            oldLog.apply(console, arguments);
-            displayMessage(message);
-            setTimeout(function() {checkConsole()}, 250);
-        };
-    })();
-    
-
-
-    document.addEventListener('keydown', function(event) {
-        checkConsole();
-    });
-
-
 
     function updateTitle(title) {
         document.title = title;
-        displayMessage(title);
-        setTimeout(function() {checkConsole()}, 250);
-        
+        setTimeout(function() { 
+            displayMessage(title);
+        }, 500);
     }
 
 
@@ -183,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
     // Получаем массив цветов
-    let colors = console.logHistory.join('').match(/#[a-f0-9]{6}/g);
+    try { let colors = console.logHistory.join('').match(/#[a-f0-9]{6}/g); } catch(n) { null; }
 
     // Функция для определения наиболее яркого цвета
     function getBrightestColor(colors) {
@@ -220,8 +141,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         null;
     }
 
-    // Получаем доступ к <iframe> по его id
-    const iframe = document.getElementById('myIframe');
 
     try {
         // Получаем содержимое тега head из iframe
@@ -260,16 +179,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
         card.style.setProperty("--yPos", `${y}px`);
       });
     });
-
-
-    fetch('background.html') 
-    .then(response => response.text()) 
-    .then(html => { 
-      const view = document.createElement('div');
-      view.innerHTML = html; 
-      view.style.cssText = "position: absolute; width: 150%; height: 100%; transform: translate(-2%, -8%); opacity: 0.5; bottom: 10px; padding: 80px;";
-      document.body.appendChild(view); 
-    })
-    .catch(error => console.error('BACK: ' + error));
 
 });

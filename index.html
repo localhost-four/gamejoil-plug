@@ -1,62 +1,199 @@
-<html lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"><head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+<!DOCTYPE html>
+<html lang="en">
 
-	
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 
-	<meta name="robots" content="index, follow">
+    
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="HandheldFriendly" content="True">
-	<meta name="theme-color" content="#191919">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="robots" content="noindex, nofollow">
 
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="theme-color" content="#191919">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<script>
-		performance.mark('gj-start');
-	</script>
+    
 
-	<script>
-		!function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
-	</script>
+    <script>
+        performance.mark('gj-start');
+    </script>
 
-	<title>Game Jolt: Plugin API (K)</title>
+    <script>
+        !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+    </script>
 
-	
+    <!-- FB -->
+    <meta property="fb:app_id" content="410666682312265">
+    <meta property="og:site_name" content="Game Jolt">
+    <meta property="fb:admins" content="1070315546">
 
-	<!-- FB -->
-	<meta property="fb:app_id" content="410666682312265">
-	<meta property="og:site_name" content="Game Jolt">
-	<meta property="fb:admins" content="1070315546">
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@gamejolt">
 
-	<!-- Twitter -->
-	<meta name="twitter:site" content="@gamejolt">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="https://s.gjcdn.net/img/favicon.png">
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/png" href="https://s.gjcdn.net/img/favicon.png">
-	<!-- <link rel="icon" type="image/png" href="img/favicon.png"> -->
-	<!-- gj:ssr-metatags -->
+    <!-- gj:ssr-metatags -->
 
-	<!-- ssr-preload-links -->
-	
-	<script type="module" crossorigin="" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"></script>
-	<link rel="stylesheet" href="https://s.gjcdn.net/assets/8e65eadf.css">
-<link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/ed114da9.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/e94dbdeb.css"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/653c5126.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/5d6da4ac.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/391ffe84.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/d2911a26.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d0c259dd.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/c6cc95df.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/f994ef75.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d45ce8b7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/9e11fce3.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/f1d3fa17.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/7ffbb20a.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/14addee9.css"></head>
-<body id="root">
-    <iframe id="myFrame" sandbox="allow-forms allow-modals allow-scripts" title="gamejolt.com" scrolling="auto" width="100%" height="100%" allowtransparency="true" noresize="" src="https://gamejolt.com/games" name="mainFrame">
-        <p>¯\_(ツ)_/¯</p>
-    </iframe>
-</div>
-	
-	
-	<script href="api.js"></script>
-	<script href="code.js"></script>
-	<script href="browser.js"></script>
-	<script href="dnt.js"></script>
-	<script href="gj-js-api-min.js"></script>
-	<script href="gj-js-api.js"></script>
-	<script href="mode.js"></script>
-	<script href="script.js"></script>
-	
-</body></html>
+    <!-- ssr-preload-links -->
+    <script type="module" crossorigin="" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"></script>
+    <link rel="stylesheet" href="https://s.gjcdn.net/assets/8e65eadf.css">
+
+
+
+    <link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/ed114da9.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/e94dbdeb.css"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/653c5126.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/5d6da4ac.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/391ffe84.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/d2911a26.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d0c259dd.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/c6cc95df.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/f994ef75.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d45ce8b7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/9e11fce3.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/f1d3fa17.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/7ffbb20a.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/14addee9.css">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plugin</title>
+
+
+    <style>
+
+        #myFrame {
+            min-width: 80%;
+            min-height: 80%;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            
+        }
+        
+        html, body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #image-container {
+            position: relative;
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #uploaded-image {
+            display: flex;
+            position: absolute;
+            z-index: -2;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: contain;
+        }
+
+        img {
+            min-width: 100%;
+            min-height: 100%;
+
+            z-index: -1;
+            position: relative;
+
+            pointer-events: none;
+
+            bottom: 0;
+            right: 0;
+        }
+
+        #upload-form {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+
+        iframe {
+            min-width: 80%;
+            min-height: 80%;
+            border: none;
+            border: 1px solid black;
+            transition: opacity 0.5s;
+
+            opacity: 0.6;
+        }
+
+    </style>
+
+    <script defer src="./api.js"></script>
+    <script defer src="./browser.js"></script>
+    <script defer src="./code.js"></script>
+    <script defer src="./dnt.js"></script>
+    <script defer src="./gj-js-api-min.js"></script>
+    <script defer src="./gj-js-api.js"></script>
+    <script defer src="./mode.js"></script>
+    
+    <script defer src="./window.js"></script>
+
+</head>
+
+
+<body width="100%" height="100%">
+    <noscript>¯\_(ツ)_/¯</noscript>
+    <frameset cols="*" width="100%" height="100%">
+        <iframe id="myFrame" sandbox="allow-forms allow-modals allow-scripts" title="gamejolt.com" scrolling="auto" width="100%" height="100%" allowtransparency="true" noresize src="https://gamejolt.com/games" name="mainFrame">
+            <p>¯\_(ツ)_/¯</p>
+        </iframe>
+        <img id="uploaded-image" width="100%" height="100%">
+        <form id="upload-form" enctype="multipart/form-data" style="opacity: 0.6;">
+            <input type="file" id="upload-input" accept="image/*">
+            <select id="switch">
+                <option value="background">Background</option>
+                <option value="image">Image</option>
+            </select>
+            <input type="submit" value="upload">
+        </form>
+    </frameset>
+
+    <script>
+        
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var input = document.getElementById('upload-input');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    const switchOption = document.getElementById('switch');
+                    var image = document.getElementById('uploaded-image');
+                    if (switchOption.value === 'image') {
+                        document.body.style.backgroundImage = null;
+                        image.src = e.target.result;
+                        image.ariaSetSize = 'cover';
+                        image.style.display = 'flex';
+                    } else {
+                        document.body.style.background = 'url(' + e.target.result + ') no-repeat';
+                        document.body.style.backgroundSize = 'cover';
+                        image.style.display = 'none';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+
+        document.querySelectorAll('body').forEach(section => {
+            document.body.addEventListener('mousemove', function(e) {
+                let winWidth = window.innerWidth;
+                let winHeight = window.innerHeight;
+                let moveOnX = e.pageX / (winWidth / 5);
+                let moveOnY = e.pageY / (winHeight / 5);
+                section.style.boxShadow = moveOnX + 'px ' + moveOnY + 'px 10px rgba(0, 0, 0, 0.3)';
+            });
+        });
+    </script>
+</body>
+</html>

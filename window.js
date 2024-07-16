@@ -22,11 +22,7 @@ console.log('version 2.1v');
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  function sleep(ms) {
-
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
+  /*
   // звуковая часть 
   function click() {
     new Audio(scr='cursor/click.wav').play();
@@ -45,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.onkeyup = typing;
-
+  */
 
   // Слушаем событие нажатия на правую кнопку мыши
   document.addEventListener('contextmenu', function(e) {
@@ -90,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var closeButton = document.createElement('nav');
     closeButton.innerHTML = `
     <ul>
-      <li><a href="reboot.php" target="_self">Reboot</a></li>
       <li><a data-wow-delay='2s' target="_self" onclick="Save()" download = ` + window.location.origin + `.html href = ` + url + `>Save</a></li>
     </ul>`;
     closeButton.style.stroke="blue";
