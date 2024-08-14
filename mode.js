@@ -25,15 +25,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Функция для добавления сообщения на страницу
     function displayMessage(mess) {
-
-        try {
-            document.getElementsByTagName("title")[0].innerHTML = mess;
-        } catch(n) {
-            null;
-        }
-
         var message = document.createElement('div');
-        message.innerText = mess;
+        message.innerText = JSON.stringify(mess);
         message.style.position = 'fixed';
         message.style.top = '0';
         message.style.left = '15%';
@@ -49,8 +42,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         setTimeout(function() {
             message.style.top = '-100px';
+            try {
+                document.getElementsByTagName("title")[0].innerHTML = mess;
+            } catch(n) {
+                document.title = mess;
+            }
             setTimeout(function() {
                 message.remove();
+                try {
+                    document.getElementsByTagName("title")[0].innerHTML = 'Plugin';
+                } catch(n) {
+                    document.title = 'Plugin';
+                }
             }, 500);
         }, 2600);
         
@@ -66,6 +69,64 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var iframe = document.getElementById('myFrame');
         
         iframe.onload = function() {
+
+            const inputField = document.getElementById('inputField');
+            const getButton = document.getElementById('getButton');
+
+            // Функция для вывода значения в консоль
+            function displayInput(value) {
+                inputField.value = value;
+                iframe.src = value;
+                try { iframe.contentWindow.location.reload(true); } catch(n) { null; }
+            }
+        
+            // Функция для установки cookie
+            function setCookie(name, value, days) {
+                const expires = new Date(Date.now() + days * 864e5).toUTCString();
+                document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+            }
+        
+            // Функция для получения значения cookie
+            function getCookie(name) {
+                return document.cookie.split('; ').reduce((r, v) => {
+                    const parts = v.split('=');
+                    return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+                }, '');
+            }
+        
+            window.top.postMessage('reply', '*');
+        
+            // Установка значения input из cookie и localStorage при загрузке страницы
+            window.onload = function() {
+                const savedValueCookie = getCookie('inputValue');
+                const savedValueLocalStorage = localStorage.getItem('inputValue');
+
+                inputField.value = iframe.src;
+
+                if (savedValueCookie) {
+                    inputField.value = savedValueCookie;
+                    displayInput(savedValueCookie); // Выводим сохраненное значение из cookie в консоль
+                } else if (savedValueLocalStorage) {
+                    inputField.value = savedValueLocalStorage;
+                    displayInput(savedValueLocalStorage); // Выводим сохраненное значение из localStorage в консоль
+                }
+            };
+        
+            // Обработчик события для поля ввода
+            inputField.addEventListener('input', function() {
+                displayInput(inputField.value); // Автоматически выводим результат при вводе
+            });
+        
+            // Обработчик события для кнопки
+            getButton.addEventListener('click', function() {
+                const inputValue = inputField.value.trim();
+                
+                if (inputValue) {
+                    setCookie('inputValue', inputValue, 7); // Сохраняем значение в cookie на 7 дней
+                    localStorage.setItem('inputValue', inputValue); // Сохраняем значение в localStorage
+                }
+            });
+
             setTimeout(function() { 
                 displayMessage('Managed to connect!');
             }, 500);
