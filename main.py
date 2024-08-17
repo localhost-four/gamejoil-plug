@@ -11,6 +11,7 @@ class Browser(QMainWindow):
         self.setWindowTitle("Plugin")
         self.setWindowIcon(QIcon('favicon.png')) 
         self.setGeometry(100, 100, 1200, 800)
+        self.setContentsMargins(0, 0, 0, 0)  
 
         # Создание виджетов
         self.browser = QWebEngineView()

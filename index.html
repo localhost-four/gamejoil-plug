@@ -1,20 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" class="offline" lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    
+    <meta name="color-scheme" content="light dark">
 
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,
+                                 maximum-scale=1.0, user-scalable=yes">
+    <meta name="Plugin" content="#fff">
+
+    <meta name="robots" content="index, follow">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="HandheldFriendly" content="True">
     <meta name="theme-color" content="#191919">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="gamejolt_plugin">
+    <link rel="apple-touch-icon-precomposed" href="https://s.gjcdn.net/assets/82a38961.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="https://s.gjcdn.net/assets/5f142c9a.png">
+    <meta name="msapplication-TileColor" content="#191919">
+
     
+    <link type="image/x-icon" rel="shortcut icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link type="image/png" sizes="16x16" rel="icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link type="image/png" sizes="32x32" rel="icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link type="image/png" sizes="120x120" rel="icon" href="https://s.gjcdn.net/img/favicon.png">
+    <!-- для Facebook и ВКонтакте (протокол Open Graph) -->
+    <meta property="og:title" content="gamejolt_plugin">
+    <meta property="og:description" content="You supported me and helped me a lot with this idea.
+    but the project is being closed because it has become very stuffy here.">
+    <meta property="og:image" content="https://s.gjcdn.net/img/favicon.png">
+    <meta property="og:url" content="https://localhost-four.github.io/gamejoil-plug/">
+    <meta property="og:site_name" content="gamejolt_plugin">
+    <!-- для Twitter -->
+    <meta name="twitter:site" content="gamejolt_plugin">
+    <meta name="twitter:title" content="You supported me and helped me a lot with this idea.
+    but the project is being closed because it has become very stuffy here.">
+    <meta name="twitter:description" content="You supported me and helped me a lot with this idea.
+    but the project is being closed because it has become very stuffy here.">
 
     <script>
         performance.mark('gj-start');
@@ -26,27 +60,17 @@
 
     <!-- FB -->
     <meta property="fb:app_id" content="410666682312265">
-    <meta property="og:site_name" content="Game Jolt">
+    <meta property="og:site_name" content="gamejolt_plugin">
     <meta property="fb:admins" content="1070315546">
 
     <!-- Twitter -->
-    <meta name="twitter:site" content="@gamejolt">
+    <meta name="twitter:site" content="@gamejolt_plugin">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="https://s.gjcdn.net/img/favicon.png">
 
     <!-- gj:ssr-metatags -->
 
-    <!-- ssr-preload-links -->
-    <script type="module" crossorigin="" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"></script>
-    <link rel="stylesheet" href="https://s.gjcdn.net/assets/8e65eadf.css">
-
-
-    <link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/ed114da9.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/e94dbdeb.css"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/653c5126.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/5d6da4ac.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/391ffe84.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/d2911a26.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d0c259dd.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/c6cc95df.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/f994ef75.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d45ce8b7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/9e11fce3.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/f1d3fa17.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/7ffbb20a.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/14addee9.css">
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Plugin</title>
 
@@ -76,6 +100,7 @@
             color: aqua;
             background-color: blueviolet;
             border-radius: 5px;
+            text-decoration: none;
         }
 
         @keyframes fall {
@@ -136,6 +161,8 @@
             height: 100%;
             overflow: hidden;
 
+            transition: opacity 0.8s;
+            
         }
 
         #image-container {
@@ -146,6 +173,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            
         }
 
         #uploaded-image {
@@ -155,6 +183,7 @@
             min-width: 100%;
             min-height: 100%;
             object-fit: contain;
+            background-color: black;
         }
 
         img {
@@ -178,6 +207,11 @@
             padding: 10px;
             background-color: #f0f0f0;
             border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+
+        #upload-form:active, #upload-form:hover, #upload-form:focus {
+            border: 1.6px solid #00ffff;
         }
 
         iframe {
@@ -185,34 +219,38 @@
             min-height: 80%;
             border: none;
             border: 1px solid black;
-            transition: opacity 0.5s;
-
             opacity: 0.6;
         }
 
         
     </style>
 
+    <script defer src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script>
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="modulepreload" as="script" crossorigin="" href="code.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="swap.js">
+
+    <link rel="modulepreload" as="script" crossorigin="" href="plag.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="gj-js-api.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="gj-js-api-min.js">
+
     <script defer src="./api.js"></script>
     <script defer src="./browser.js"></script>
-    <script defer src="./code.js"></script>
-    <script defer src="./dnt.js"></script>
-    <script defer src="./gj-js-api-min.js"></script>
-    <script defer src="./gj-js-api.js"></script>
     <script defer src="./mode.js"></script>
     <script defer src="./dom.js"></script>
     <script defer src="./ball.js"></script>
     
-    <script defer src="./console.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script defer src="./main.js"></script>
-    <script defer src="./swap.js"></script>
     <script defer src="./script.js"></script>
     <script defer src="./window.js"></script>
 
 </head>
 
 
-<body width="100%" height="100%">
+<body width="100%" height="100%" jstcache="0" contenteditable="false">
 
     <main id="container">
         <noscript>¯\_(ツ)_/¯</noscript>
@@ -231,7 +269,7 @@
                 <p>¯\_(ツ)_/¯</p>
             </iframe>
 
-            <img id="uploaded-image" width="100%" height="100%">
+            <img id="uploaded-image" width="100%" height="100%" src="main.gif">
 
             <form id="upload-form" enctype="multipart/form-data" style="opacity: 0.6;">
                 <input type="file" id="upload-input" accept="image/*">
@@ -261,7 +299,12 @@
             }
         }
     
-    
+        function getCookie(name) {
+            return document.cookie.split('; ').reduce((r, v) => {
+                const parts = v.split('=');
+                return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+            }, '');
+        }   
 
         document.getElementById('upload-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -276,16 +319,48 @@
                         image.src = e.target.result;
                         image.ariaSetSize = 'cover';
                         image.style.display = 'flex';
+
+                        localStorage.setItem('switch', true);
+
                     } else {
                         document.body.style.background = 'url(' + e.target.result + ') no-repeat';
                         document.body.style.backgroundSize = 'cover';
                         image.style.display = 'none';
                     }
+
+                    localStorage.setItem('switch', false);
+                    localStorage.setItem('url', e.target.result);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         });
 
+        function displayInput(value) {
+            const switchOption = document.getElementById('switch');
+            var image = document.getElementById('uploaded-image');
+            if (localStorage.getItem('switch')) {
+                document.body.style.backgroundImage = null;
+                image.src = value;
+                image.ariaSetSize = 'cover';
+                image.style.display = 'flex';
+                switchOption.value = 'image';
+                
+            } else {
+                document.body.style.background = 'url(' + value + ') no-repeat';
+                document.body.style.backgroundSize = 'cover';
+                image.style.display = 'none';
+            }
+        }
+
+        const savedValueCookie = getCookie('url');
+        const savedValueLocalStorage = localStorage.getItem('url');
+
+        if (savedValueCookie) {
+            displayInput(savedValueCookie); 
+        } else if (savedValueLocalStorage) {
+            displayInput(savedValueLocalStorage); 
+        }
+        
 
         document.querySelectorAll('body').forEach(section => {
             document.body.addEventListener('mousemove', function(e) {
@@ -293,7 +368,7 @@
                 let winHeight = window.innerHeight;
                 let moveOnX = e.pageX / (winWidth / 5);
                 let moveOnY = e.pageY / (winHeight / 5);
-                section.style.boxShadow = moveOnX + 'px ' + moveOnY + 'px 10px rgba(0, 0, 0, 0.3)';
+                section.style.boxShadow = moveOnX + 'px ' + moveOnY + 'px 10px rgba(0, 0, 0, 0.8)';
             });
         });
     </script>
