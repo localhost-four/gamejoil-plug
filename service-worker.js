@@ -2,8 +2,6 @@ const CACHE_NAME = 'my-site-cache-v2';
 const urlsToCache = [
   '/gamejoil-plug/index.html',
   '/gamejoil-plug/index.html',
-  '/gamejoil-plug/styles.css',
-  '/gamejoil-plug/script.js',
   '/gamejoil-plug/favicon.png'
 ];
 
