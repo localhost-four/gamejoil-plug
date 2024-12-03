@@ -1,279 +1,301 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 
-    <!-- Установка кодировки и масштаба -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
-    <!-- Мета-теги SEO для обоих языков -->
-    <meta name="description" content="TODO List is a handy notebook for managing tasks. Share your list offline and with others, access it anytime, and improve your productivity.">
-    <meta name="keywords" content="TODO, task list, notebook, productivity, tasks, management">
-    <meta name="author" content="localhost-four.github.io">
+    <meta name="robots" content="noindex, nofollow">
 
-    <!-- Open Graph для социальных сетей (Facebook, LinkedIn, WhatsApp) -->
-    <meta property="og:title" content="TODO List - Task Management App">
-    <meta property="og:description" content="Manage your tasks effectively. Share your TODO list offline and with others. Access your tasks anytime, anywhere.">
-    <meta property="og:image" content="1img.gif">
-    <meta property="og:url" content="https://localhost-four.github.io/TODO/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="TODO List">
-    
-    <!-- Мета-теги для Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TODO List - Task Management App">
-    <meta name="twitter:description" content="Manage your tasks effectively. Share your TODO list offline and with others. Access your tasks anytime, anywhere.">
-    <meta name="twitter:image" content="1img.gif">
-    <meta name="twitter:url" content="https://localhost-four.github.io/TODO/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="theme-color" content="#191919">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Иконки для мобильных устройств -->
-    <link rel="icon" href="1img.gif">
-    <link rel="apple-touch-icon" href="1img.gif">
-    <link rel="icon" sizes="192x192" href="1img.gif">
-    <link rel="icon" sizes="512x512" href="1img.gif">
+    
 
-    <!-- Манифест для PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link href="%PUBLIC_URL%/manifest.json" rel="manifest" />
-
-
-    <!-- Заголовок страницы -->
-    <title>TODO List — Task Management App</title>
-
-    <!-- Firebase SDK -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://127.0.0.1:3000;"> -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://127.0.0.1:3000; 'nonce-xyz123';"> -->
-    <!-- Подключаем Firebase SDK для модулей -->
-    <script type="module">
-        // Подключение Firebase с использованием ES Modules
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
-    
-        // Настройки Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDMek24rrioHn3kPaOGDCNIgq1CU7ROVsE",
-            authDomain: "todo-4e809.firebaseapp.com",
-            projectId: "todo-4e809",
-            storageBucket: "todo-4e809.firebasestorage.app",
-            messagingSenderId: "166519588590",
-            appId: "1:166519588590:web:cb3f6b4e6cba1749a515ff",
-            measurementId: "G-45P7VYXPCZ"
-        };
-    
-        // Инициализация Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-    
-        // Получение текущей ссылки страницы
-        const currentUrl = window.location.href;
-    
-        // Функция для вычисления расстояния Левенштейна между двумя строками
-        function levenshtein(a, b) {
-            const tmp = [];
-            let i, j, alen = a.length, blen = b.length, cost;
-            if (alen === 0) { return blen; }
-            if (blen === 0) { return alen; }
-            for (i = 0; i <= alen; i++) { tmp[i] = [i]; }
-            for (j = 0; j <= blen; j++) { tmp[0][j] = j; }
-            for (i = 1; i <= alen; i++) {
-                for (j = 1; j <= blen; j++) {
-                    cost = (a[i - 1] === b[j - 1]) ? 0 : 1;
-                    tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + cost);
-                }
-            }
-            return tmp[alen][blen];
-        }
-    
-        // Функция для проверки схожести между текущим URL и ссылками в базе данных
-        async function isUrlSimilar(url) {
-            const threshold = 0.8;  // Порог схожести (80%)
-            const querySnapshot = await getDocs(collection(db, "urls"));
-            let similarFound = false;
-            
-            querySnapshot.forEach((doc) => {
-                const storedUrl = doc.data().url;
-                const distance = levenshtein(url, storedUrl);
-                const maxLength = Math.max(url.length, storedUrl.length);
-                const similarity = 1 - (distance / maxLength); // Считаем схожесть как 1 - нормированное расстояние Левенштейна
-    
-                if (similarity > threshold) {
-                    similarFound = true; // Если схожесть больше порога, считаем ссылку похожей
-                }
-            });
-    
-            return similarFound;
-        }
-    
-        // Функция для фильтрации URL
-        function isValidUrl(url) {
-            console.log('check...');
-            // Проверка, что URL не начинается с localhost или 127.0.0.1
-            if (url.includes("127.0.0.1") || url.includes("localhost")) {
-                return false;
-            }
-    
-            // Проверка, что URL начинается с правильного адреса
-            if (!url.startsWith("https://localhost-four.github.io/TODO/")) {
-                return false;
-            }
-    
-            // Проверка, что URL содержит дополнительные данные после домена (например, параметры)
-            if (url === "https://localhost-four.github.io/TODO/") {
-                return false;
-            }
-            console.log('Updata: '+url);
-            return true;
-        }
-    
-        // Функция для отправки текущей ссылки в Firestore
-        async function sendUrlToFirestore() {
-            try {
-                // Проверка, что URL валиден
-                if (!isValidUrl(currentUrl)) {
-                    console.log("URL не является допустимым. Пропускаем запись.");
-                    return;
-                }
-    
-                // Проверяем, существует ли уже ссылка или схожая
-                const urlIsSimilar = await isUrlSimilar(currentUrl);
-                if (!urlIsSimilar) {
-                    // Если схожих URL нет, добавляем текущий URL в базу данных
-                    await addDoc(collection(db, "urls"), {
-                        url: currentUrl,
-                        timestamp: new Date().toISOString()
-                    });
-                    console.log("URL добавлен в базу данных.");
-                } else {
-                    console.log("Этот URL или его слишком схожая версия уже существует в базе данных.");
-                }
-    
-                // Проверяем, сколько ссылок в базе данных
-                const querySnapshot = await getDocs(collection(db, "urls"));
-                const urlCount = querySnapshot.size; // Количество документов в коллекции
-    
-                // Если ссылок больше 30, очищаем базу данных
-                if (urlCount > 30) {
-                    console.log("Количество ссылок больше 30. Очищаем базу данных.");
-                    await clearDatabase();  // Очищаем базу данных
-                }
-    
-            } catch (error) {
-                console.error("Ошибка при добавлении URL:", error);
-            }
-        }
-    
-        // Функция для очистки базы данных
-        async function clearDatabase() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "urls")); // Получаем все документы из коллекции "urls"
-                
-                // Для каждого документа в коллекции удаляем его
-                querySnapshot.forEach(async (docSnapshot) => {
-                    await deleteDoc(doc(db, "urls", docSnapshot.id)); // Удаляем документ по ID
-                });
-    
-                console.log("База данных очищена.");
-            } catch (error) {
-                console.error("Ошибка при очистке базы данных:", error);
-            }
-        }
-    
-        // Отправляем текущую ссылку в базу данных
-        sendUrlToFirestore();
+    <script>
+        performance.mark('gj-start');
     </script>
+
+    <script>
+        !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+    </script>
+
+    <!-- FB -->
+    <meta property="fb:app_id" content="410666682312265">
+    <meta property="og:site_name" content="Game Jolt">
+    <meta property="fb:admins" content="1070315546">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@gamejolt">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="https://s.gjcdn.net/img/favicon.png">
+
+    <!-- gj:ssr-metatags -->
+
+    <!-- ssr-preload-links -->
+    <script type="module" crossorigin="" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"></script>
+    <link rel="stylesheet" href="https://s.gjcdn.net/assets/8e65eadf.css">
+
+
+    <link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/ed114da9.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/e94dbdeb.css"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/653c5126.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/5d6da4ac.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/391ffe84.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/d2911a26.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d0c259dd.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/c6cc95df.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/f994ef75.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d45ce8b7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/9e11fce3.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/f1d3fa17.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/7ffbb20a.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/14addee9.css">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plugin</title>
+
+
+    <style>
+        #myFrame {
+            min-width: 80%;
+            min-height: 80%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex: 0;
+            
+        }
+
+        header {
+            position: absolute;
+            padding: 20px;
+            top: 0%;
+            left: 5%;
+            flex: 0;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        a {
+            color: aqua;
+            background-color: blueviolet;
+            border-radius: 5px;
+        }
+
+        @keyframes fall {
+            0% {
+                background-color: transparent; /* Изменено на transparent */
+                border-radius: 1px;
+            }
+            100% {
+                border-radius: 40px;
+                background-color: #333;
+            }
+        }
+
+        .fall-animation {
+            animation: fall 0.5s forwards; /* Добавляем forwards, чтобы сохранить конечное состояние */
+        }
+
+        nav {
+            display: none;
+            justify-content: center;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 400px; /* Ширина строки ввода */
+            padding: 10px;
+            border: none;
+            border-radius: 25px; /* Закругление углов */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень */
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 25px; /* Закругление углов кнопки */
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #777; /* Цвет при наведении */
+        }
+        
+        html, body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+        }
+
+        #image-container {
+            position: relative;
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #uploaded-image {
+            display: flex;
+            position: absolute;
+            z-index: -2;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: contain;
+        }
+
+        img {
+            min-width: 100%;
+            min-height: 100%;
+
+            z-index: -1;
+            position: relative;
+
+            pointer-events: none;
+
+            bottom: 0;
+            right: 0;
+        }
+
+        #upload-form {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+
+        iframe {
+            min-width: 80%;
+            min-height: 80%;
+            border: none;
+            border: 1px solid black;
+            transition: opacity 0.5s;
+
+            opacity: 0.6;
+        }
+
+        
+    </style>
+
+    <script defer src="./api.js"></script>
+    <script defer src="./browser.js"></script>
+    <script defer src="./code.js"></script>
+    <script defer src="./dnt.js"></script>
+    <script defer src="./gj-js-api-min.js"></script>
+    <script defer src="./gj-js-api.js"></script>
+    <script defer src="./mode.js"></script>
+    <script defer src="./dom.js"></script>
+    <script defer src="./ball.js"></script>
+    
+    <script defer src="./console.js"></script>
+    <script defer src="./main.js"></script>
+    <script defer src="./swap.js"></script>
+    <script defer src="./script.js"></script>
+    <script defer src="./window.js"></script>
+
+</head>
+
+
+<body width="100%" height="100%">
+
+    <main id="container">
+        <noscript>¯\_(ツ)_/¯</noscript>
+        
+        <header width="100%" height="100%">
+            <a href="#top" onclick="toggleContent(this)"> 📁 <p class="arrow">^</p></a></h1>
+            <nav>
+                <input type="text" id="inputField" placeholder="Enter url..." />
+                <button id="getButton">get</button>
+            </nav>
+        </header>
+        
+        <frameset cols="*" width="100%" height="100%">
+        
+            <iframe id="myFrame" loading = "lazy" name="gamejolt.com" seamless title="gamejolt.com" scrolling="auto" width="100%" height="100%" allowtransparency="true" noresize src="https://gamejolt.com/games" name="mainFrame">
+                <p>¯\_(ツ)_/¯</p>
+            </iframe>
+
+            <img id="uploaded-image" width="100%" height="100%">
+
+            <form id="upload-form" enctype="multipart/form-data" style="opacity: 0.6;">
+                <input type="file" id="upload-input" accept="image/*">
+                <select id="switch">
+                    <option value="background">Background</option>
+                    <option value="image">Image</option>
+                </select>
+                <input type="submit" value="upload">
+            </form>
+        </frameset>
+    </main>
+
+    <script>
+      
+        function toggleContent(header) {
+            const content = header.nextElementSibling; 
+            const arrow = header.querySelector('.arrow');
+            
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block"; 
+                arrow.textContent = "▼"; 
+                content.classList.add('fall-animation');
+            } else {
+                content.style.display = "none"; 
+                arrow.textContent = "^";
+                content.classList.remove('fall-animation');
+            }
+        }
+    
     
 
-
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer nonce="xyz123"></script>
-    <script src="manifest.js" defer nonce="xyz123"></script>
-    <script src="service-worker.js" defer nonce="xyz123"></script>
-</head>
-<body>
-    <div class="app-container">
-        <header>
-            <div class="app-header">
-                <a href="#top" onclick="copy()" nonce="xyz123">TODO</a>
-                <a href="home/">LOOK</a>
-                <div class="tabs-container">
-                    <button class="tab" nonce="xyz123" onclick="openNewBoardTab()">DESK</button>
-                    <button class="tab" nonce="xyz123" onclick="openAddTaskModal()">TASK</button>
-                    <button class="tab" id="theme-button" onclick="themes()">|</button>
-                </div>
-            </div>
-        </header>
-        <div class="tabs-container">
-            <div id="tabs"></div>
-        </div>
-
-        <div class="task-container" id="task-container">
-            <!-- Доски будут добавляться сюда -->
-        </div>
-        
-        <!-- Modal for Adding Tasks -->
-        <div class="modal" id="addTaskModal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()" nonce="xyz123">&times;</span>
-                <h2>Add Task</h2>
-                <input type="text" id="taskTitle" placeholder="Task Title">
-                <input type="date" id="taskDeadline">
-                <script nonce="xyz123">
-                    document.getElementById('taskDeadline').value = new Date().toISOString().split('T')[0];
-                </script>
-                <textarea id="taskDescription" placeholder="Task Description"></textarea>
-                <input type="url" id="taskImageUrl" placeholder="Image URL (Only for Image)">
-                <input type="url" id="taskLink" placeholder="Resource Link (url)">
-                <select id="taskPriority">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-                <button onclick="addTask()" nonce="xyz123">Add Task</button>
-                <div id="filePreview" class="file-preview"></div>
-            </div>
-        </div>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var input = document.getElementById('upload-input');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    const switchOption = document.getElementById('switch');
+                    var image = document.getElementById('uploaded-image');
+                    if (switchOption.value === 'image') {
+                        document.body.style.backgroundImage = null;
+                        image.src = e.target.result;
+                        image.ariaSetSize = 'cover';
+                        image.style.display = 'flex';
+                    } else {
+                        document.body.style.background = 'url(' + e.target.result + ') no-repeat';
+                        document.body.style.backgroundSize = 'cover';
+                        image.style.display = 'none';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
 
 
-        <!-- Modal for Board Settings -->
-        <div class="modal" id="settingsModal">
-            <div class="modal-content">
-                <span class="close" onclick="closeSettings()" nonce="xyz123">&times;</span>
-                <h2>Board Settings</h2>
-                <label>Emoji:</label>
-                <input type="text" id="emojiInput">
-                <label>Background Color:</label>
-                <input type="color" id="backgroundColorInput">
-                <label>Text Color:</label>
-                <input type="color" id="textColorInput">
-                <label>Style:</label>
-                <select id="styleInput">
-                    <option value="block">Block</option>
-                    <option value="grid">Grid</option>
-                    <option value="flex">Flex</option>
-                </select>
-                <button onclick="applyBoardSettings()" nonce="xyz123">Apply</button>
-                
-            </div>
-        </div>
-
-        <!-- Modal for adding comment -->
-        <div id="commentModal" class="modal">
-            <div class="modal-content">
-                <h2>Add Comment</h2>
-                <textarea id="commentText" placeholder="Enter your comment..."></textarea>
-                
-                <div>
-                    <label for="urlInput">Image URL:</label>
-                    <input type="url" id="urlInput" placeholder="Enter image URL">
-                </div>
-                
-                <button id="saveCommentBtn">Save Comment</button>
-                <button onclick="closeCommentModal()" nonce="xyz123">Cancel</button>
-            </div>
-        </div>
-    </div>
-
+        document.querySelectorAll('body').forEach(section => {
+            document.body.addEventListener('mousemove', function(e) {
+                let winWidth = window.innerWidth;
+                let winHeight = window.innerHeight;
+                let moveOnX = e.pageX / (winWidth / 5);
+                let moveOnY = e.pageY / (winHeight / 5);
+                section.style.boxShadow = moveOnX + 'px ' + moveOnY + 'px 10px rgba(0, 0, 0, 0.3)';
+            });
+        });
+    </script>
 </body>
 </html>
