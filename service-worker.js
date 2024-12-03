@@ -1,10 +1,10 @@
 const CACHE_NAME = 'my-site-cache-v2';
 const urlsToCache = [
-  '/TODO/index.html',
-  '/TODO/index.html',
-  '/TODO/styles.css',
-  '/TODO/script.js',
-  '/TODO/1img.gif'
+  '/gamejoil-plug/index.html',
+  '/gamejoil-plug/index.html',
+  '/gamejoil-plug/styles.css',
+  '/gamejoil-plug/script.js',
+  '/gamejoil-plug/favicon.png'
 ];
 
 // Устанавливаем сервис-воркер и кэшируем необходимые файлы
