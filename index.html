@@ -4,49 +4,101 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
-
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="robots" content="noindex, nofollow">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="HandheldFriendly" content="True">
+    <meta name="referrer" content="no-referrer">
     <meta name="theme-color" content="#191919">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="rating" content="General">
+    <meta name="theme-color" content="#ffffff">
 
-    <script>
+    <!-- Yandex.RTB -->
+    <script async src="https://mc.yandex.ru/metrika/tag.js"></script>
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <link rel="preconnect" href="https://yastatic.net">
+    <link rel="preconnect" href="https://avatars.mds.yandex.net">
+    <link rel="preconnect" href="https://mc.yandex.ru">
+    <link rel="preconnect" href="https://ads.adfox.ru">
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html"
+            height="0" width="0" style="display:none;visibility:hidden" id="tag-manager">
+        </iframe>
+    </noscript>
+    
+    <script type="module" defer>
         performance.mark('gj-start');
     </script>
 
-    <script>
+    <script type="module" defer>
         !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
     </script>
 
+    <!-- Мета-теги SEO для обоих языков -->
+    <meta name="description" content="Join a growing community of creators and gamers from around the world, sharing videos, art, memes and livestreaming together!">
+    <meta name="keywords" content="plugin, gamejoil-plug, web, world, sharing videos, art, memes, livestreaming, together, community, creators, Game Jolt Plugin, Share your creations, website, Game Jolt, game jolt, gj, FanArtFriday, InayahBoss, WarThunderIntel, GJAsks, GJAsk, gjasks, GJ Pro-Tip, gj pro-tip">
+    <meta name="author" content="/">
+
+    <!-- Open Graph для социальных сетей (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:title" content="Game Jolt Plugin - Share your creations">
+    <meta property="og:description" content="Join a growing community of creators and gamers from around the world, sharing videos, art, memes and livestreaming together!">
+    <meta property="og:image" content="favicon.png">
+    <meta property="og:url" content="/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Jolt">
+    
+    <!-- Мета-теги для Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Game Jolt Plugin - Share your creations">
+    <meta name="twitter:description" content="Manage your tasks effectively. Share your TODO list offline and with others. Access your tasks anytime, anywhere.">
+    <meta name="twitter:image" content="favicon.png">
+    <meta name="twitter:url" content="/">
+    
     <!-- FB -->
     <meta property="fb:app_id" content="410666682312265">
     <meta property="og:site_name" content="Game Jolt">
     <meta property="fb:admins" content="1070315546">
 
+    <!-- Защита от кликджекинга -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Установка заголовка X-Content-Type-Options -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- Установка заголовка Strict-Transport-Security (HSTS) через мета-тег -->
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+    <!-- Защита от кросс-доменных запросов (CORS) -->
+    <meta http-equiv="Access-Control-Allow-Origin" content="self">
+    <!-- Установка заголовка Permissions-Policy для управления доступом к API -->
+    <meta http-equiv="Permissions-Policy" content="geolocation=(self), microphone=(), camera=()">
+    <meta name="referrer" content="no-referrer">
+    
     <!-- Twitter -->
     <meta name="twitter:site" content="@gamejolt">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="https://s.gjcdn.net/img/favicon.png">
+    <link rel="icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link rel="apple-touch-icon" href="https://s.gjcdn.net/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="https://s.gjcdn.net/img/favicon.png">
+    <link rel="icon" sizes="512x512" href="https://s.gjcdn.net/img/favicon.png">
 
     <!-- gj:ssr-metatags -->
 
     <!-- ssr-preload-links -->
-    <script type="module" crossorigin="" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"></script>
+    <script type="module" crossorigin="anonymous" src="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js" defer></script>
     <link rel="stylesheet" href="https://s.gjcdn.net/assets/8e65eadf.css">
 
 
     <link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/ed114da9.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/e94dbdeb.css"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-ZV3SVDN43D" async=""></script><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/653c5126.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/gameserver-d1b6fb4b.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/5d6da4ac.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/391ffe84.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/d2911a26.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d0c259dd.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/c6cc95df.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/f994ef75.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/d45ce8b7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/9e11fce3.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/f1d3fa17.css"><link rel="modulepreload" as="script" crossorigin="" href="https://s.gjcdn.net/assets/7ffbb20a.js"><link rel="stylesheet" href="https://s.gjcdn.net/assets/14addee9.css">
+    <script async crossorigin="anonymous" src="https://yastatic.net/safeframe-bundles/0.83/host.js"></script>
 
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Plugin</title>
 
@@ -218,7 +270,7 @@
 </head>
 
 
-<body width="100%" height="100%">
+<body width="100%" height="100%" allowfullscreen="allowfullscreen" jstcache="0" contenteditable="false">
 
     <main id="container">
         <noscript>¯\_(ツ)_/¯</noscript>
