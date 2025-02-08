@@ -42,4 +42,4 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-//navigator.serviceWorker.register('service-worker.js')
+navigator.serviceWorker.register('service-worker.js')
