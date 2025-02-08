@@ -1,6 +1,6 @@
 // Проверяем поддержку сервис-воркеров и PWA
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+    navigator.serviceWorker.register('gamejoil-plug/service-worker.js').then(function(registration) {
         console.log('Сервис-воркер зарегистрирован:', registration);
     }).catch(function(error) {
         console.log('Ошибка при регистрации сервис-воркера:', error);
